@@ -1,9 +1,10 @@
+/* stylelint-disable at-rule-no-unknown */
+/* This file uses Tailwind CSS directives which are valid but not recognized by standard CSS linters */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
+@layer base {  :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -37,6 +38,11 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 10.6% 64.9%;
+    
+    /* Normal UI scaling variables */
+    --ui-scale: 1;
+    --spacing-scale: 1;
+    --font-scale: 1;
   }
 
   .dark {
@@ -76,17 +82,18 @@
 
   * {
     border-color: hsl(var(--border));
-  }
-
-  body {
+  }  body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: calc(1rem * var(--font-scale));
+    line-height: calc(1.5 * var(--font-scale));
   }
 
   html {
     scroll-behavior: smooth;
+    font-size: 16px; /* Normal base font size */
   }
 }
 
@@ -222,35 +229,6 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  /* Enhanced glass morphism effects */
-  .glass-hover {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px) saturate(1.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  }
-
-  .dark .glass-hover {
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(18px) saturate(1.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  /* Better layout utilities */
-  .center-layout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-  }
-
-  .content-spacing {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
   /* Enhanced scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -376,69 +354,90 @@
 
 /* Component-specific improvements */
 @layer components {
+  /* Normal chat interface styling */
   .chat-message {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease-in-out;
+    @apply p-4 rounded-lg transition-all duration-200 ease-in-out;
+    font-size: calc(1rem * var(--font-scale));
+    min-height: calc(2.5rem * var(--ui-scale));
   }
 
   .chat-message:hover {
-    background: hsl(var(--muted) / 0.5);
-    transform: scale(1.01);
+    @apply bg-muted/50 transform scale-[1.01];
   }
 
   .chat-input {
-    border-radius: 0.75rem;
-    border: 2px solid transparent;
-    background: hsl(var(--background) / 0.5);
-    backdrop-filter: blur(4px);
-    transition: all 0.2s;
+    @apply rounded-lg border-2 border-transparent bg-background/50 backdrop-blur-sm transition-all duration-200;
+    padding: calc(0.75rem * var(--spacing-scale));
+    font-size: calc(1rem * var(--font-scale));
+    min-height: calc(3rem * var(--ui-scale));
   }
 
   .chat-input:focus {
-    border-color: hsl(var(--primary));
-    background: hsl(var(--background));
+    @apply border-primary bg-background;
   }
 
+  /* Normal buttons */
+  .btn-normal {
+    padding: calc(0.625rem * var(--spacing-scale)) calc(1.5rem * var(--spacing-scale));
+    font-size: calc(1rem * var(--font-scale));
+    min-height: calc(2.5rem * var(--ui-scale));
+  }
+
+  /* Normal sidebar */
   .sidebar-nav {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    @apply space-y-1 p-3;
   }
 
   .sidebar-nav-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    border-radius: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    transition: all 0.2s;
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all duration-200 hover:bg-accent hover:text-accent-foreground;
+    font-size: calc(1rem * var(--font-scale));
+    min-height: calc(2.5rem * var(--ui-scale));
   }
 
-  .sidebar-nav-item:hover {
-    background: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+  /* Normal header */
+  .header-normal {
+    @apply backdrop-blur-md bg-background/80 border-b border-border/50;
+    padding: calc(1rem * var(--spacing-scale)) calc(1.5rem * var(--spacing-scale));
+    min-height: calc(3.5rem * var(--ui-scale));
   }
-
+  /* Header glass effect */
   .header-glass {
     backdrop-filter: blur(12px);
     background: hsl(var(--background) / 0.8);
     border-bottom: 1px solid hsl(var(--border) / 0.5);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
 
-  /* Improved suggestion cards */
-  .suggestion-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Normal icons */
+  .icon-normal {
+    width: calc(1.25rem * var(--ui-scale));
+    height: calc(1.25rem * var(--ui-scale));
   }
 
-  .suggestion-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  .icon-large-normal {
+    width: calc(1.5rem * var(--ui-scale));
+    height: calc(1.5rem * var(--ui-scale));
   }
 
-  .dark .suggestion-card:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  /* Normal cards */
+  .card-normal {
+    padding: calc(1.5rem * var(--spacing-scale));
+    border-radius: calc(0.75rem * var(--ui-scale));
+  }
+
+  /* Normal text sizes */
+  .text-small-normal {
+    font-size: calc(0.875rem * var(--font-scale));
+    line-height: calc(1.4 * var(--font-scale));
+  }
+
+  .text-normal {
+    font-size: calc(1rem * var(--font-scale));
+    line-height: calc(1.5 * var(--font-scale));
+  }
+
+  .text-large-normal {
+    font-size: calc(1.125rem * var(--font-scale));
+    line-height: calc(1.5 * var(--font-scale));
   }
 }
