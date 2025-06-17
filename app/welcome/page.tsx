@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Bot, Sparkles, Zap, Shield, Brain, ArrowRight } from 'lucide-react';
+import { Bot, Zap, Shield, Brain, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -42,7 +41,7 @@ export default function WelcomePage() {
                   <span className="gradient-text">AI Conversation</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0">
-                  Experience DeepSeek's cutting-edge reasoning capabilities. Get intelligent responses, 
+                  Experience DeepSeek&apos;s cutting-edge reasoning capabilities. Get intelligent responses, 
                   solve complex problems, and explore the possibilities of advanced AI.
                 </p>
               </div>
@@ -73,7 +72,7 @@ export default function WelcomePage() {
                 
                 <div className="space-y-3">
                   <div className="bg-muted/50 p-3 rounded-lg text-sm">
-                    Hello! I'm DeepSeek. How can I help you today?
+                    Hello! I&apos;m DeepSeek. How can I help you today?
                   </div>
                   <div className="bg-primary/10 p-3 rounded-lg text-sm ml-8">
                     Can you help me solve a complex problem?
@@ -136,7 +135,7 @@ export default function WelcomePage() {
                 Ready to Experience the Future?
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of users who are already leveraging DeepSeek's advanced AI capabilities.
+                Join thousands of users who are already leveraging DeepSeek&apos;s advanced AI capabilities.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>

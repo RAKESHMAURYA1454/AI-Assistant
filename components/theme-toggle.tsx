@@ -4,7 +4,6 @@ import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -29,28 +28,20 @@ export function ThemeToggle() {
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       className="w-9 h-9 relative overflow-hidden"
     >
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        initial={false}
-        animate={{
-          rotate: theme === "dark" ? 180 : 0,
-          scale: theme === "dark" ? 0 : 1,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+          theme === "dark" ? "rotate-180 scale-0" : "rotate-0 scale-100"
+        }`}
       >
         <Sun className="h-4 w-4" />
-      </motion.div>
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        initial={false}
-        animate={{
-          rotate: theme === "light" ? -180 : 0,
-          scale: theme === "light" ? 0 : 1,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
+      </div>
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+          theme === "light" ? "-rotate-180 scale-0" : "rotate-0 scale-100"
+        }`}
       >
         <Moon className="h-4 w-4" />
-      </motion.div>
+      </div>
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

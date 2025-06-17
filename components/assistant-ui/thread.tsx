@@ -20,7 +20,6 @@ import {
   Square,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { MarkdownText } from "@/components/assistant-ui/markdown-text";
@@ -71,13 +70,7 @@ export const Thread: FC = () => {
 const ThreadScrollToBottom: FC = () => {
   return (
     <ThreadPrimitive.ScrollToBottom asChild>
-      <motion.div
-        className="absolute bottom-20 right-4 z-10"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
+      <div className="absolute bottom-20 right-4 z-10">
         <TooltipIconButton
           tooltip="Scroll to bottom"
           variant="outline"
@@ -85,91 +78,46 @@ const ThreadScrollToBottom: FC = () => {
         >
           <ArrowDownIcon className="w-4 h-4" />
         </TooltipIconButton>
-      </motion.div>
+      </div>
     </ThreadPrimitive.ScrollToBottom>
   );
 };
 
 const ThreadWelcome: FC = () => {
   return (
-    <motion.div 
-      className="w-full max-w-5xl mx-auto text-center space-y-12"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
+    <div className="w-full max-w-5xl mx-auto text-center space-y-12">
       {/* Hero Section */}
       <div className="space-y-8">
-        <motion.div
-          className="flex flex-col items-center space-y-6"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
+        <div className="flex flex-col items-center space-y-6">
           {/* Logo */}
           <div className="relative">
-            <motion.div
-              className="w-24 h-24 bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 rounded-3xl flex items-center justify-center shadow-2xl"
-              animate={{ 
-                rotate: [0, 3, -3, 0],
-                scale: [1, 1.02, 1]
-              }}
-              transition={{ 
-                duration: 6, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
+            <div className="w-24 h-24 bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 rounded-3xl flex items-center justify-center shadow-2xl">
               <Bot className="w-12 h-12 text-white" />
-            </motion.div>
-            <motion.div
-              className="absolute -top-3 -right-3"
-              animate={{ 
-                scale: [1, 1.3, 1],
-                rotate: [0, 15, 0]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
+            </div>
+            <div className="absolute -top-3 -right-3">
               <Sparkles className="w-8 h-8 text-yellow-400 drop-shadow-lg" />
-            </motion.div>
+            </div>
           </div>
           
           {/* Title and Description */}
           <div className="space-y-4">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-bold gradient-text leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
+            <h1 className="text-5xl md:text-6xl font-bold gradient-text leading-tight">
               Welcome to DeepSeek
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-            >
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Your intelligent AI assistant powered by advanced reasoning capabilities. 
               Ask questions, solve problems, or get creative assistance.
-            </motion.p>
+            </p>
           </div>
-        </motion.div>
-      </div>
-
-      {/* Suggestions Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.6 }}
-        className="space-y-6"
-      >
+        </div>
+      </div>      {/* Suggestions Section */}
+      <div className="space-y-6">
         <h2 className="text-2xl font-semibold text-foreground/90">
           How can I help you today?
         </h2>
         <ThreadWelcomeSuggestions />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
@@ -215,22 +163,9 @@ const ThreadWelcomeSuggestions: FC = () => {
 
   return (
     <div className="w-full max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {suggestions.map((suggestion, index) => (
-          <motion.div
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">        {suggestions.map((suggestion) => (
+          <div
             key={suggestion.title}
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              delay: 0.1 * index, 
-              duration: 0.5,
-              ease: "easeOut"
-            }}
-            whileHover={{ 
-              scale: 1.03, 
-              y: -4,
-              transition: { duration: 0.2 }
-            }}
             className="h-full"
           >
             <ThreadPrimitive.Suggestion
@@ -243,13 +178,9 @@ const ThreadWelcomeSuggestions: FC = () => {
                 <div className="flex flex-col h-full space-y-4">
                   {/* Icon */}
                   <div className="flex-shrink-0">
-                    <motion.div
-                      className="text-4xl"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div className="text-4xl">
                       {suggestion.icon}
-                    </motion.div>
+                    </div>
                   </div>
                   
                   {/* Content */}
@@ -271,7 +202,7 @@ const ThreadWelcomeSuggestions: FC = () => {
                 </div>
               </div>
             </ThreadPrimitive.Suggestion>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -280,12 +211,7 @@ const ThreadWelcomeSuggestions: FC = () => {
 
 const Composer: FC = () => {
   return (
-    <motion.div 
-      className="w-full"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="w-full">
       <ComposerPrimitive.Root className="relative group">
         <div className="flex items-end gap-3 p-4 rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/30 focus-within:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl">
           {/* Input Area */}
@@ -312,7 +238,7 @@ const Composer: FC = () => {
           </p>
         </div>
       </ComposerPrimitive.Root>
-    </motion.div>
+    </div>
   );
 };
 
@@ -321,24 +247,16 @@ const ComposerAction: FC = () => {
     <>
       <ThreadPrimitive.If running={false}>
         <ComposerPrimitive.Send asChild>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center w-10 h-10 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
+          <button className="flex items-center justify-center w-10 h-10 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
             <SendHorizontalIcon className="w-5 h-5" />
-          </motion.button>
+          </button>
         </ComposerPrimitive.Send>
       </ThreadPrimitive.If>
       <ThreadPrimitive.If running>
         <ComposerPrimitive.Cancel asChild>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center w-10 h-10 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-destructive/50 focus:ring-offset-2"
-          >
+          <button className="flex items-center justify-center w-10 h-10 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-destructive/50 focus:ring-offset-2">
             <Square className="w-5 h-5" />
-          </motion.button>
+          </button>
         </ComposerPrimitive.Cancel>
       </ThreadPrimitive.If>
     </>
@@ -483,20 +401,5 @@ const BranchPicker: FC<BranchPickerPrimitive.Root.Props> = ({
           <ChevronRightIcon className="w-3 h-3" />
         </TooltipIconButton>
       </BranchPickerPrimitive.Next>
-    </BranchPickerPrimitive.Root>
-  );
-};
-
-const CircleStopIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      fill="currentColor"
-      width="16"
-      height="16"
-    >
-      <rect width="10" height="10" x="3" y="3" rx="2" />
-    </svg>
-  );
+    </BranchPickerPrimitive.Root>  );
 };
