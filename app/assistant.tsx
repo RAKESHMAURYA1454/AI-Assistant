@@ -10,11 +10,17 @@ import { NoSSR } from "@/components/no-ssr";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Bot } from "lucide-react";
+import { useState } from "react";
 
 export const Assistant = () => {
   const { user, isLoaded } = useUser();
+  const [error, setError] = useState<string | null>(null);
   const runtime = useChatRuntime({
     api: "/api/chat",
+    onError: (err: Error | unknown) => {
+      const message = err instanceof Error ? err.message : "Failed to get response from DeepSeek.";
+      setError(message);
+    },
   });
 
   if (!isLoaded) {
@@ -35,6 +41,11 @@ export const Assistant = () => {
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
+      {error && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-red-100 text-red-700 px-4 py-2 rounded shadow-lg">
+          {error}
+        </div>
+      )}
       <NoSSR>
         <SidebarProvider>
           <AppSidebar />
